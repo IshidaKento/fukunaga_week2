@@ -255,23 +255,40 @@ for(int i=0;i<BUFSIZE;i++){
   }
 }
 
-int hit,max_hit;
+float hit,max_hit;
 hit=0;
-max_hit=0;
+max_hit=-10;
+int bestnum;
+
+for(int t=0;t<len_seq-8;t++){
+    hit=0;
+    for(int i=t;i<t+10;i++){
+        char c = g_pro[0].seq[i];
+        switch (c) {
+            case 'A':
+                hit = hit + si[0][i-t];
+                break;
+            case 'C':
+                hit = hit + si[1][i-t];
+                break;
+            case 'G':
+                hit = hit + si[2][i-t];
+                break;
+            case 'T':
+                hit = hit + si[3][i-t];
+                break;
+        }
+}
+if(hit > max_hit){
+            max_hit = hit;
+            bestnum = t;
+        }
 
 
-
-
-
-
-
-printf("%d\n",len_seq);
-
-
-
-
-
-
+}
+  
+printf("%f\n",max_hit);
+printf("%d\n",bestnum);
 
 
 
